@@ -206,8 +206,8 @@ if args.restart_dir:
 args.work_dir = os.path.join(args.work_dir, timestamp)
 if args.name == "N/A" and not args.debug:
     # If you find this too annoying, uncomment the following line and use timestamp as name.
-    # args.name = timestamp
-    raise ValueError("Please give a name to your run!")
+    args.name = timestamp
+    #raise ValueError("Please give a name to your run!")
 print(f"Experiment name: {args.name}")
 logging = create_exp_dir(args.work_dir,
     scripts_to_save=['train_transformer.py', 'models/deq_transformer.py', '../lib/solvers.py'], debug=args.debug)

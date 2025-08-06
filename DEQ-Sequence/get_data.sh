@@ -6,8 +6,11 @@ cd data
 
 echo "- Downloading WikiText-103 (WT103)"
 if [[ ! -d 'wikitext-103' ]]; then
-    wget --continue https://s3.amazonaws.com/research.metamind.io/wikitext/wikitext-103-v1.zip
-    unzip -q wikitext-103-v1.zip
+    wget --continue https://s3.amazonaws.com/fast-ai-nlp/wikitext-103.tgz
+    mkdir -p wikitext-103
+    tar -xzf wikitext-103.tgz -C wikitext-103 --strip-components=1
+    # https://s3.amazonaws.com/research.metamind.io/wikitext/wikitext-103-v1.zip
+    # unzip -q wikitext-103-v1.zip
     cd wikitext-103
     mv wiki.train.tokens train.txt
     mv wiki.valid.tokens valid.txt

@@ -203,11 +203,34 @@ class RelPartialLearnableDecoderLayer(nn.Module):
 
 
 class DEQTransformerLM(nn.Module):
-    def __init__(self, n_token, n_layer, eval_n_layer, n_head, d_model, d_head, d_inner,
-                 dropout, dropatt, tie_weights=True, d_embed=None, div_val=1,
-                 tie_projs=[False], pre_lnorm=False, wnorm=False, tgt_len=None,
-                 mem_len=None, local_size=0, pretrain_steps=1, cutoffs=[], load='', 
-                 f_solver=anderson, b_solver=None, stop_mode="rel", logging=None):
+    def __init__(
+        self,
+        n_token,
+        n_layer,
+        eval_n_layer,
+        n_head,
+        d_model,
+        d_head,
+        d_inner,
+        dropout,
+        dropatt,
+        tie_weights=True,
+        d_embed=None,
+        div_val=1,
+        tie_projs=[False],
+        pre_lnorm=False,
+        wnorm=False,
+        tgt_len=None,
+        mem_len=None,
+        local_size=0,
+        pretrain_steps=1,
+        cutoffs=[],
+        load='', 
+        f_solver=anderson,
+        b_solver=None,
+        stop_mode="rel",
+        logging=None
+        ):
         super().__init__()
         self.n_token = n_token
 

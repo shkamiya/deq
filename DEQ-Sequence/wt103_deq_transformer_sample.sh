@@ -9,8 +9,6 @@
 #PJM -e logs/%n.%j.err
 #PJM -L jobenv=singularity
 
-set -euxo pipefail
-
 # === 環境 ===
 module purge
 module load singularity
@@ -23,8 +21,8 @@ SIF=$HOME/singularity/kamiya_wisteria.sif
 DATA=/work/gb20/b20109/deq/data/wikitext-103
 CKPT_DIR=/work/gb20/b20109/deq/DEQ-Sequence/LM-TFMdeq-wt103/20250808-221856
 
-# === DEQ Transformer 再開学習 ===
-singularity exec --nv \
+# === DEQ sampling ===
+singularity exec --nv --cleanenv\
   $SIF \
   python sample_wt103.py \
     --cuda \
@@ -36,10 +34,8 @@ singularity exec --nv \
     --tgt_len 150 --mem_len 150 \
     --adaptive \
     --div_val 4 \
-    --n_layer 2 --eval_n_layer 24 \
     --d_embed 700 --d_model 700 --n_head 10 --d_head 70 --d_inner 48000 \
     --dropout 0.05 --dropatt 0.0 \
     --wnorm \
     --f_solver anderson --b_solver broyden --stop_mode rel \
-    --f_thres 30 --b_thres 35 \
-  
+    --f_thres 30 --b_thres 35

@@ -89,14 +89,6 @@ def main():
     vocab = corpus.vocab
     n_token = len(vocab)
 
-    # 追加: 学習時設定を再現
-    if args.adaptive:
-        cutoffs = [20000, 40000, 200000]
-        tie_projs = [False] + [True] * len(cutoffs)
-    else:
-        cutoffs = []
-        tie_projs = [False]
-
     # === モデル構築（学習時の設定と一致させる） ===
     model = DEQTransformerLM(
         n_token=n_token,
@@ -111,7 +103,7 @@ def main():
         tie_weights=True,
         d_embed=args.d_embed,
         div_val=args.div_val if args.adaptive else 1,
-        tie_projs=tie_projs,         # 学習時の値に合わせる
+        tie_projs=[False],         # 学習時の値に合わせる
         pre_lnorm=False,           # 学習時の値に合わせる
         wnorm=args.wnorm,
         tgt_len=args.tgt_len,
@@ -119,8 +111,7 @@ def main():
         f_solver=args.f_solver,
         b_solver=args.b_solver,
         stop_mode=args.stop_mode,
-        load="",                 # ここでは state_dict を後で手動ロード
-        cutoffs=cutoffs,
+        load=None,                 # ここでは state_dict を後で手動ロード
     ).to(device)
 
     # state_dict ロード

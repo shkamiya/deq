@@ -19,7 +19,7 @@ cd /work/gb20/b20109/deq/DEQ-Sequence
 # === パス ===
 SIF=$HOME/singularity/kamiya_wisteria.sif
 DATA=/work/gb20/b20109/deq/data/wikitext-103
-CKPT_DIR=/work/gb20/b20109/deq/DEQ-Sequence/LM-TFMdeq-wt103/20250807-215307
+CKPT_DIR=/work/gb20/b20109/deq/DEQ-Sequence/LM-TFMdeq-wt103/20250808-162948
 
 # === DEQ Transformer 再開学習 ===
 singularity exec --nv \
@@ -42,6 +42,6 @@ singularity exec --nv \
     --f_thres 30 --b_thres 35 \
     --batch_size 56 \
     --load $CKPT_DIR/model_state_dict.pth \
-    --start_train_steps 150000 \
+    --start_train_steps 245000 \
     --pretrain_steps 32000 \
-    --name resume-150k-wisteria
+    --name resume-245k-wisteria
